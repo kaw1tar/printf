@@ -7,9 +7,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-
-
 int _printf(const char *format, ...);
-
+void custom_printf(const char *format, ...);
 
 #endif
