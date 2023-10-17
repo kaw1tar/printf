@@ -3,16 +3,20 @@
 #include <stdarg.h>
 
 /**
- * custom_printf - A custom printf function to print integers
+ * _printf - A custom printf function to print integers
  * @format: The format string
  * @...: The integer values to print
+ *
+ * Return: The number of characters written.
  */
 
-void custom_printf(const char *format, ...)
+int _printf(const char *format, ...)
 {
 	va_list args;
 
 	va_start(args, format);
+
+	int chars_written = 0;
 
 	while (*format)
 	{
@@ -23,12 +27,14 @@ void custom_printf(const char *format, ...)
 			int n = snprintf(buffer, sizeof(buffer), " %d", value);
 
 			write(1, buffer, n);
+			chars_written += n;
 			format += 2;
 		}
-	else
-	{
-		write(1, format++, 1);
-	}
+		else
+		{
+			write(1, format++, 1);
+			chars_written++;
+		}
 
 	}
 
