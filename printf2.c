@@ -1,31 +1,30 @@
 #include "main.h"
-#include <stdio.h>
 #include <unistd.h>
 #include <stdarg.h>
 
 /**
- * _printf - A custom printf function to print integers
+ * custom_printf - A custom printf function to print integers
  * @format: The format string
  * @...: The integer values to print
  *
  * Return: The number of characters written.
  */
-int _printf(const char *format, ...)
+int custom_printf(const char *format, ...)
 {
-	int chars_written = 0;
-	char buffer[12];
-
 	va_list args;
 
+	int chars_written = 0;
 	va_start(args, format);
-
 
 	while (*format)
 	{
 		if (*format == '%' && (*(format + 1) == 'd' || *(format + 1) == 'i'))
 		{
 			int value = va_arg(args, int);
-			int n = snprintf(buffer, sizeof(buffer), " %d", value);
+			char buffer[12];
+			int n;
+
+			n = snprintf(buffer, sizeof(buffer), " %d", value);
 
 			chars_written += n;
 			write(1, buffer, n);
@@ -38,7 +37,6 @@ int _printf(const char *format, ...)
 			format++;
 		}
 	}
-
 	va_end(args);
 	return (chars_written);
 }
