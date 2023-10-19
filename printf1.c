@@ -14,5 +14,6 @@ int count;
 va_start(args, format);
 count = vprintf(format, args);
 va_end(args);
+
 return (count);
 }
